@@ -19,6 +19,8 @@ class CreateFillupQuesTable extends Migration
             $table->foreignId('media_id')->nullable();
             $table->boolean('active')->default(0);
             $table->string('hint')->nullable();
+            $table->set('level', ['easy', 'medium', 'hard'])->default('easy');
+            $table->integer('score')->default(1);
             $table->timestamps();
         });
     }
