@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFillupQuesTable extends Migration
+class CreateFillupmultiExplanationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateFillupQuesTable extends Migration
      */
     public function up()
     {
-        Schema::create('fmt_fillup_ques', function (Blueprint $table) {
+        Schema::create('fmt_fillupmulti_explanation', function (Blueprint $table) {
             $table->id();
-            $table->longText('question')->nullable();
+            $table->foreignId('question_id');
+            $table->longText('reviews')->nullable();
+            $table->longText('solve')->nullable();
             $table->foreignId('media_id')->nullable();
             $table->boolean('active')->default(0);
-            $table->string('hint')->nullable();
-            $table->set('level', ['easy', 'medium', 'hard'])->default('easy');
-            $table->integer('score')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -32,6 +32,6 @@ class CreateFillupQuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fmt_fillup_ques');
+        Schema::dropIfExists('fmt_fillupmulti_explanation');
     }
 }
